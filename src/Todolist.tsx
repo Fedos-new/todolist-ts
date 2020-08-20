@@ -2,6 +2,8 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import './App.css';
 import {FilterValuesType} from "./App";
 import {EditableSpan} from "./components/EditableSpan";
+import {Button, IconButton, Checkbox, TextField} from "@material-ui/core";
+import {AddBoxOutlined, Delete} from "@material-ui/icons";
 
 export type TasksType = {
     id: string
@@ -62,16 +64,21 @@ function Todolist(props: PropsType) {
         <div className="App">
             <div>
                 <h3><EditableSpan title={props.title} saveNewTitle={changeTodolistTitle}/>
-                    <button onClick={onClickRemoveTodolist}>X</button>
+                    <IconButton onClick={onClickRemoveTodolist}>
+                        <Delete/>
+                    </IconButton>
                 </h3>
                 <div>
-                    <input value={title}
-                           onChange={onChangeHandler}
-                           onKeyPress={onKeyPressHandler}
-                           className={error ? "error" : ""}
+                    <TextField value={title}
+                               variant={"outlined"}
+                               onChange={onChangeHandler}
+                               onKeyPress={onKeyPressHandler}
+                               error={!!error}
+                               helperText={error}
                     />
-                    <button onClick={addTasks}>+</button>
-                    {error && <div className="error-message">{error}</div>}
+                    <Button onClick={addTasks}  color={"primary"}>
+                        <AddBoxOutlined />
+                    </Button>
                 </div>
                 <ul>
                     {
@@ -83,28 +90,31 @@ function Todolist(props: PropsType) {
                             const changeTaskTitle = (newTitle: string) => {
                                 props.changeTaskTitle(t.id, newTitle, props.id)
                             }
-                            return <li key={t.id} className={t.isDone ? "is-done" : ""}>
-                                <input type="checkbox"
-                                       checked={t.isDone}
-                                       onChange={onChangeHandler}/>
+                            return <div key={t.id} className={t.isDone ? "is-done" : ""}>
+                                <Checkbox
+                                    checked={t.isDone}
+                                    onChange={onChangeHandler}/>
 
                                 <EditableSpan title={t.title} saveNewTitle={changeTaskTitle}/>
                                 {/*<span>{t.title}</span>*/}
-                                <button onClick={onClickHandler}>x</button>
-                            </li>
+                                <IconButton onClick={onClickHandler} color={"primary"}>
+                                    <Delete/>
+                                </IconButton>
+                            </div>
                         })
                     }
 
                 </ul>
                 <div>
-                    <button className={props.filter === "all" ? "active-filter" : ""} onClick={onAllClickHandler}>All
-                    </button>
-                    <button className={props.filter === "active" ? "active-filter" : ""}
+                    <Button variant={props.filter === "all" ? "contained" : "text"}
+                            onClick={onAllClickHandler}>All
+                    </Button>
+                    <Button color={"primary"} variant={props.filter === "active" ? "contained" : "text"}
                             onClick={onActiveClickHandler}>Active
-                    </button>
-                    <button className={props.filter === "completed" ? "active-filter" : ""}
+                    </Button>
+                    <Button color={"secondary"} variant={props.filter === "completed" ? "contained" : "text"}
                             onClick={onCompletedClickHandler}>Completed
-                    </button>
+                    </Button>
                 </div>
             </div>
         </div>
