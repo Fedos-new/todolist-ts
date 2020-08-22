@@ -20,6 +20,22 @@ export  type ChangeTodolistFilterActionType = {
     filter: FilterValuesType
 }
 
+export const RemoveTodolistAC = (todolistId: string): RemoveTodolistActionType => {
+    return { type: 'REMOVE-TODOLIST', id: todolistId}
+}
+export const AddTodolistAC = (newTodolistTitle: string): AddTodolistActionType => {
+    return { type: 'ADD-TODOLIST', title: newTodolistTitle}
+}
+export const ChangeTodolistAC = (todolistId2: string, newTodolistTitle:string ): ChangeTodolistTitleActionType => {
+    return { type: 'CHANGE-TODOLIST-TITLE', id: todolistId2, title: newTodolistTitle}
+}
+export const ChangeTodolistFilterAC = (todolistId2: string, newFilter: FilterValuesType ): ChangeTodolistFilterActionType => {
+    return { type: 'CHANGE-TODOLIST-FILTER', id: todolistId2, filter: newFilter}
+}
+
+
+
+
 type ActionsType = RemoveTodolistActionType | AddTodolistActionType | ChangeTodolistTitleActionType| ChangeTodolistFilterActionType
 
 export const todolistsReducer = (state: Array<TodolistType>, action: ActionsType) => {

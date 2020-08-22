@@ -3,7 +3,7 @@ import './App.css';
 import {FilterValuesType} from "./App";
 import {EditableSpan} from "./components/EditableSpan";
 import {Button, IconButton, Checkbox, TextField} from "@material-ui/core";
-import {AddBoxOutlined, Delete} from "@material-ui/icons";
+import {AddBoxOutlined , Delete} from "@material-ui/icons";
 
 export type TasksType = {
     id: string
