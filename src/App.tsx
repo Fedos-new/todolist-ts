@@ -16,7 +16,7 @@ export type TodolistType = {
     filter: string
 }
 
-type TaskStateType = {
+export type TasksStateType = {
     [key: string]: Array<TasksType>
 }
 
@@ -29,7 +29,7 @@ function App() {
         {id: todoListId2, title: "What to buy", filter: "all"}
     ])
 
-    let [tasks, setTasks] = useState<TaskStateType>({
+    let [tasks, setTasks] = useState<TasksStateType>({
         [todoListId1]: [
             {id: v1(), title: "HTML&CSS", isDone: true},
             {id: v1(), title: "JS", isDone: true},
@@ -46,22 +46,12 @@ function App() {
         ],
     })
 
-    function addTodolist(title: string) {
-        let newTodolistId = v1();
-        let newTodolist: TodolistType = {id: newTodolistId, title: title, filter: 'all'};
-        setTodolists([newTodolist, ...todolists])
-        setTasks({
-            ...tasks,
-            [newTodolistId]: []
-        })
-    }
 
-    const removeTask = (id: string, todolistId: string) => {
+    function removeTask (id: string, todolistId: string) {
         let todolistTasks = tasks[todolistId];//из объекта берем свойство(нужный массив todolistId)
         tasks[todolistId] = todolistTasks.filter(t => t.id !== id)
         setTasks({...tasks})
     }
-
 
     function changeFilter(value: FilterValuesType, todolistId: string) {
         let todolist = todolists.find(tl => tl.id === todolistId);
@@ -85,6 +75,17 @@ function App() {
             task.isDone = isDone;
             setTasks({...tasks})
         }
+    }
+
+
+    function addTodolist(title: string) {
+        let newTodolistId = v1();
+        let newTodolist: TodolistType = {id: newTodolistId, title: title, filter: 'all'};
+        setTodolists([newTodolist, ...todolists])
+        setTasks({
+            ...tasks,
+            [newTodolistId]: []
+        })
     }
 
     function changeTaskTitle(id: string, newTitle: string, todolistId: string) {
