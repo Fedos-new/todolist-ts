@@ -29,20 +29,8 @@ export type ChangeTaskTitleActionType = {
 
 
 const initialState: TasksStateType = {
-    [todoListId1]: [
-        {id: v1(), title: "HTML&CSS", isDone: true},
-        {id: v1(), title: "JS", isDone: true},
-        {id: v1(), title: "React", isDone: false},
-        {id: v1(), title: "Rest API", isDone: false},
-        {id: v1(), title: "GraphQL", isDone: false}
-    ],
-    [todoListId2]: [
-        {id: v1(), title: "HTML&CSS", isDone: true},
-        {id: v1(), title: "JS", isDone: true},
-        {id: v1(), title: "React", isDone: false},
-        {id: v1(), title: "Rest API", isDone: false},
-        {id: v1(), title: "GraphQL", isDone: false}
-    ],
+    [todoListId1]: [],
+    [todoListId2]: []
 }
 
 type ActionsType = RemoveTaskActionType | AddTaskActionType | ChangeTaskStatusActionType
