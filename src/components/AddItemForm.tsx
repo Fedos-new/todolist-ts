@@ -8,7 +8,7 @@ type AddItemFormPropsType = {
     addItem: (title: string) => void
 }
 
-export function AddItemForm(props: AddItemFormPropsType) {
+export const AddItemForm = React.memo ((props: AddItemFormPropsType) => {
     console.log('AddItemForm called')
 
     let [title, setTitle] = useState("")
@@ -37,7 +37,6 @@ export function AddItemForm(props: AddItemFormPropsType) {
 
     return (
         <div>
-            <h3>Add Todolist</h3>
             <TextField value={title}
                        variant={"outlined"}
                        onChange={onChangeHandler}
@@ -53,4 +52,4 @@ export function AddItemForm(props: AddItemFormPropsType) {
         </div>
     )
 
-}
+})
