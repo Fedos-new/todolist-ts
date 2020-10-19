@@ -33,7 +33,7 @@ function AppWithRedux() {
 
     const dispatch = useDispatch()
 
-    const todolists = useSelector<AppRootState, Array<TodolistType>>((store) => store.todolist)
+    const todolists = useSelector<AppRootState, Array<TodolistType>>((store) => store.todolists)
     const tasks = useSelector<AppRootState, TasksStateType>((store) => store.tasks)
 
 
@@ -99,7 +99,7 @@ function AppWithRedux() {
                     {
                         todolists.map(tl => {
                             let allTodolistTask = tasks[tl.id]
-                            let tasksForTodolist = allTodolistTask;
+                            let tasksForTodolist = allTodolistTask
 
 
                             return <Grid item>

@@ -4,9 +4,13 @@ import {tasksReducer} from "./tasks-reducer";
 
 
 const rootReducer = combineReducers({
-    todolist: todolistsReducer,
-    tasks: tasksReducer
+    tasks: tasksReducer,
+    todolists: todolistsReducer
+
 })
+
+
+
 export type AppRootState = ReturnType<typeof rootReducer> //автомачически подтягивает типы из combineReducers
 
 export const store = createStore(rootReducer)

@@ -32,13 +32,13 @@ const Todolist = React.memo(function (props: PropsType) {
 
     const addTasks = useCallback((title: string) => {
         props.addTasks(title, props.id)
-    }, [props.addTasks,props.id])
+    }, [props.addTasks, props.id])
 
-    const onClickRemoveTodolist = useCallback(() => props.removeTodolist(props.id), [props.removeTodolist,props.id])
+    const onClickRemoveTodolist = useCallback(() => props.removeTodolist(props.id), [props.id , props.removeTodolist])
 
     const changeTodolistTitle = useCallback( (newTitle: string) => {
         props.changeTodolistTitle(props.id, newTitle)
-    }, [props.changeTodolistTitle,props.id ])
+    }, [props.id, props.changeTodolistTitle ])
 
 
     const onAllClickHandler = useCallback(() => props.changeFilter("all", props.id), [props.changeFilter,props.id])
