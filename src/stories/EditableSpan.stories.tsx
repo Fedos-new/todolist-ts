@@ -11,6 +11,6 @@ export default {
 const changeTCallback = action("Title changed")
 
 
-export  const TaskBaseExample = () => {
+export  const EditableSpanBaseExample = () => {
     return <EditableSpan title={'start title'} saveNewTitle={changeTCallback}  />
 }
