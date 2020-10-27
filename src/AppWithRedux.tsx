@@ -1,31 +1,24 @@
 import React, {useCallback} from 'react';
 import './App.css';
-import Todolist, {TasksType} from "./Todolist";
+import Todolist from "./Todolist";
 import {AddItemForm} from "./components/AddItemForm";
 import {AppBar, IconButton, Toolbar, Typography, Button, Container, Grid, Paper} from '@material-ui/core';
 import {Menu} from '@material-ui/icons';
 import {
     addTodolistAC,
     changeTodolistFilterAC,
-    changeTodolistTitleAC,
-    removeTodolistAC
+    changeTodolistTitleAC, FilterValuesType,
+    removeTodolistAC, TodolistDomainType
 } from "./state/todolists-reducer";
 import {addTaskAC, changeTaskStatusAC, changeTitleStatusAC, removeTaskAC} from "./state/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootState} from "./state/store";
+import {TaskStatuses, TaskType} from "./api/todolist-api";
 
 
-export type FilterValuesType = "all" | "completed" | "active";
-
-
-export type TodolistType = {
-    id: string
-    title: string
-    filter: string
-}
 
 export type TasksStateType = {
-    [key: string]: Array<TasksType>
+    [key: string]: Array<TaskType>
 }
 
 function AppWithRedux() {
@@ -33,7 +26,7 @@ function AppWithRedux() {
 
     const dispatch = useDispatch()
 
-    const todolists = useSelector<AppRootState, Array<TodolistType>>((store) => store.todolists)
+    const todolists = useSelector<AppRootState, Array<TodolistDomainType>>((store) => store.todolists)
     const tasks = useSelector<AppRootState, TasksStateType>((store) => store.tasks)
 
 
@@ -52,8 +45,8 @@ function AppWithRedux() {
         dispatch(action)
     }, [dispatch])
 
-    const changeStatus = useCallback((id: string, isDone: boolean, todolistId: string) => {
-        const action = changeTaskStatusAC(id, isDone, todolistId)
+    const changeStatus = useCallback((id: string, status: TaskStatuses, todolistId: string) => {
+        const action = changeTaskStatusAC(id, status, todolistId)
         dispatch(action)
     },[dispatch])
 
@@ -100,7 +93,6 @@ function AppWithRedux() {
                         todolists.map(tl => {
                             let allTodolistTask = tasks[tl.id]
                             let tasksForTodolist = allTodolistTask
-
 
                             return <Grid item>
                                 <Paper style={{padding: "10px"}}>

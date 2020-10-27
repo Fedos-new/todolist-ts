@@ -1,26 +1,23 @@
 import React, {useCallback} from 'react';
 import './App.css';
-import {FilterValuesType} from "./App";
-import {EditableSpan} from "./components/EditableSpan";
+ import {EditableSpan} from "./components/EditableSpan";
 import {Button, IconButton} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
 import {AddItemForm} from "./components/AddItemForm";
 import {Task} from "./Task";
+import {TaskStatuses, TaskType} from "./api/todolist-api";
+import {FilterValuesType} from "./state/todolists-reducer";
 
-export type TasksType = {
-    id: string
-    title: string
-    isDone: boolean
-}
+
 type PropsType = {
     id: string
     title: string
-    tasks: Array<TasksType>
+    tasks: Array<TaskType>
     removeTask: (id: string, todolistId: string) => void
     changeFilter: (value: FilterValuesType, todolistId: string) => void
     addTasks: (title: string, todolistId: string) => void
-    changeTaskStatus: (id: string, isDone: boolean, todolistId: string) => void
-    filter: string
+    changeTaskStatus: (id: string, status: TaskStatuses, todolistId: string) => void
+    filter: FilterValuesType
     removeTodolist: (todolistId: string) => void
     changeTaskTitle: (id: string, newTitle: string, todolistId: string) => void
     changeTodolistTitle: (todolistId: string, newTitle: string) => void
@@ -48,10 +45,10 @@ const Todolist = React.memo(function (props: PropsType) {
     let tasksForTodolist = props.tasks
 
     if (props.filter === "active") {
-        tasksForTodolist = props.tasks.filter(t => t.isDone === false);
+        tasksForTodolist = props.tasks.filter(t => t.status === TaskStatuses.New);
     }
     if (props.filter === "completed") {
-        tasksForTodolist = props.tasks.filter(t => t.isDone === true);
+        tasksForTodolist = props.tasks.filter(t => t.status === TaskStatuses.Completed );
     }
 
     return (
@@ -65,7 +62,7 @@ const Todolist = React.memo(function (props: PropsType) {
                 <AddItemForm addItem={addTasks}/>
                 <ul>
                     {
-                        props.tasks.map(t => <Task
+                        tasksForTodolist.map(t => <Task
                             task={t}
                             changeTaskStatus={props.changeTaskStatus}
                             changeTaskTitle={props.changeTaskTitle}
