@@ -5,7 +5,7 @@ import {v1} from "uuid";
 import {AddItemForm} from "./components/AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from '@material-ui/core';
 import {Menu} from '@material-ui/icons';
-import {TaskStatuses, TaskType, TodoTaskPriorities} from './api/todolist-api';
+import {TaskPriorities, TaskStatuses, TaskType, TodolistType, TodoTaskPriorities} from './api/todolist-api';
 import {FilterValuesType, TodolistDomainType} from './state/todolists-reducer';
 
 
@@ -27,27 +27,27 @@ function App() {
     let [tasks, setTasks] = useState<TasksStateType>({
         [todoListId1]: [
             {id: v1(), title: "HTML&CSS", status: TaskStatuses.Completed, todoListId:todoListId1,
-                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TodoTaskPriorities.Hi},
+                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TaskPriorities.Hi},
             {id: v1(), title: "JS", status: TaskStatuses.InProgress, todoListId:todoListId1,
-                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TodoTaskPriorities.Hi},
+                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TaskPriorities.Hi},
             {id: v1(), title: "React", status: TaskStatuses.InProgress, todoListId:todoListId1,
-                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TodoTaskPriorities.Hi},
+                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TaskPriorities.Hi},
             {id: v1(), title: "Rest API", status: TaskStatuses.Draft, todoListId:todoListId1,
-                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TodoTaskPriorities.Hi},
+                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TaskPriorities.Hi},
             {id: v1(), title: "GraphQL", status: TaskStatuses.New, todoListId:todoListId1,
-                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TodoTaskPriorities.Hi}
+                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TaskPriorities.Hi}
         ],
         [todoListId2]: [
             {id: v1(), title: "HTML&CSS", status: TaskStatuses.Completed, todoListId:todoListId2,
-                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TodoTaskPriorities.Hi},
+                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TaskPriorities.Hi},
             {id: v1(), title: "JS", status: TaskStatuses.Completed, todoListId:todoListId2,
-                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TodoTaskPriorities.Hi},
+                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TaskPriorities.Hi},
             {id: v1(), title: "React", status: TaskStatuses.Completed, todoListId:todoListId2,
-                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TodoTaskPriorities.Hi},
+                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TaskPriorities.Hi},
             {id: v1(), title: "Rest API", status: TaskStatuses.Completed, todoListId:todoListId2,
-                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TodoTaskPriorities.Hi},
+                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TaskPriorities.Hi},
             {id: v1(), title: "GraphQL", status: TaskStatuses.Completed, todoListId:todoListId2,
-                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TodoTaskPriorities.Hi}
+                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TaskPriorities.Hi}
         ],
     })
 
@@ -68,7 +68,7 @@ function App() {
 
     function addTasks(title: string, todolistId: string) {
         let task = {id: v1(), title: title, status: TaskStatuses.New, todoListId:todolistId,
-            addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TodoTaskPriorities.Hi};
+            addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TaskPriorities.Hi};
         let todolistTasks = tasks[todolistId];
         tasks[todolistId] = [task, ...todolistTasks]
         setTasks({...tasks})

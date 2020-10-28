@@ -24,7 +24,7 @@ export type TodolistType = {
 
 }
 
-type ResponseTodolistType<D> = {
+export type ResponseTodolistType<D> = {
     resultCode: number
     messages: Array<string>
     data: D
@@ -36,6 +36,7 @@ export enum TaskStatuses {
     Completed = 2,
     Draft = 3
 }
+
 export enum TodoTaskPriorities {
     Low = 0,
     Middle = 1,
@@ -44,12 +45,19 @@ export enum TodoTaskPriorities {
     Later = 4
 }
 
+export enum TaskPriorities {
+    Low = 0,
+    Middle = 1,
+    Hi = 2,
+    Urgently = 3,
+    Later = 4
+}
 
 export type TaskType = {
     description: string
     title: string
     status: TaskStatuses
-    priority: TodoTaskPriorities
+    priority: TaskPriorities
     startDate: string
     deadline: string
     id: string
@@ -70,13 +78,22 @@ type CreateDeleteUpdateTask<D> = {
     data: D
 }
 
+export type UpdateTaskModelType = {
+    title: string
+    description: string
+    status: TaskStatuses
+    priority: TaskPriorities
+    startDate: string
+    deadline: string
+}
+
 
 export const todolistAPI = {
     updateTodolist(todolistId: string, title: string) {
         return instance.put<ResponseTodolistType<{}>>(`${todolistId}`, {title: title})
     },
     getTodolists() {
-        return instance.get<ResponseTodolistType<{}>>('')
+        return instance.get<TodolistType[]>('').then(res => res.data)
     },
     deleteTodolist(todolistId: string) {
         return instance.delete<ResponseTodolistType<{}>>(`${todolistId}`)
@@ -87,8 +104,8 @@ export const todolistAPI = {
 }
 
 export const tasksAPI = {
-    updateTask(todolistId: string, title: string, taskId: string) {
-        return instance.put<CreateDeleteUpdateTask<{ item: TaskType }>>(`${todolistId}/tasks/${taskId}`, {title: title})
+    updateTask(todolistId: string, taskId: string, model: UpdateTaskModelType) {
+        return instance.put<CreateDeleteUpdateTask<{ item: TaskType }>>(`${todolistId}/tasks/${taskId}`, model)
     },
     getTasks(todolistId: string) {
         return instance.get<GetTaskType>(`${todolistId}/tasks`)
@@ -97,6 +114,6 @@ export const tasksAPI = {
         return instance.delete<CreateDeleteUpdateTask<{}>>(`${todolistId}/tasks/${taskId}`)
     },
     createTask(todolistId: string, title: string) {
-        return instance.post<CreateDeleteUpdateTask<{}>>(`${todolistId}/tasks`, {title: title})
+        return instance.post<CreateDeleteUpdateTask<{ item: TaskType }>>(`${todolistId}/tasks`, {title: title})
     }
 }

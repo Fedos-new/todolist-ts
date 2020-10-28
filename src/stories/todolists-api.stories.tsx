@@ -11,8 +11,7 @@ export const GetTodolists = () => {
     useEffect(() => {
         todolistAPI.getTodolists()
             .then((res) => {
-                debugger
-                setState(res.data)
+                setState(res)
             })
     }, [])
 
@@ -120,6 +119,7 @@ export const UpdateTaskTitle = () => {
 
 
     const updateTask = () => {
+        // @ts-ignore
         tasksAPI.updateTask(todolistId, title, taskId)
             .then((res) => {
                 setState(res.data)

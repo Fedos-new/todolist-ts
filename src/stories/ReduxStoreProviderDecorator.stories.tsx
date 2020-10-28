@@ -5,7 +5,7 @@ import {tasksReducer} from '../state/tasks-reducer'
 import {todolistsReducer} from '../state/todolists-reducer'
 import {v1} from 'uuid'
 import {AppRootState} from '../state/store'
-import {TaskStatuses, TodoTaskPriorities} from "../api/todolist-api";
+import {TaskPriorities, TaskStatuses} from "../api/todolist-api";
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
@@ -22,16 +22,16 @@ const initialGlobalState = {
     tasks: {
         ["todolistId1"]: [
             {id: v1(), title: "HTML&CSS", status: TaskStatuses.New,todoListId:"todolistId1",
-                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TodoTaskPriorities.Hi},
+                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TaskPriorities.Hi},
             {id: v1(), title: "JS",status: TaskStatuses.New,todoListId:"todolistId1",
-                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TodoTaskPriorities.Hi},
+                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TaskPriorities.Hi},
             {id: v1(), title: "JS"}
         ],
         ["todolistId2"]: [
             {id: v1(), title: "Milk", status: TaskStatuses.New,todoListId:"todolistId2",
-                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TodoTaskPriorities.Hi},
+                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TaskPriorities.Hi},
             {id: v1(), title: "React Book", status: TaskStatuses.New,todoListId:"todolistId2",
-                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TodoTaskPriorities.Hi},
+                addedDate: '', deadline: '', description: '', startDate:'', order: 0, priority: TaskPriorities.Hi},
         ]
     }
 };
