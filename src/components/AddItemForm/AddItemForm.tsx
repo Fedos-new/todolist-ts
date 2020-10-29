@@ -1,5 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
-import '../App.css';
+import '../../app/App.css';
 import Button from "@material-ui/core/Button";
 import {TextField} from "@material-ui/core";
 import {PostAddOutlined} from "@material-ui/icons";
