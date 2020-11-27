@@ -11,5 +11,5 @@ export default {
 const callback = action("Button 'add' was inside the from")
 
 export  const AddItemFormBaseExamle = (props: any) => {
-    return <AddItemForm addItem={callback} />
+    return <AddItemForm addItem={callback} entityStatus={'idle'}/>
 }

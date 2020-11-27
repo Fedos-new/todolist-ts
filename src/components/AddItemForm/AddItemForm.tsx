@@ -1,11 +1,12 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import '../../app/App.css';
-import Button from "@material-ui/core/Button";
-import {TextField} from "@material-ui/core";
+import {IconButton, TextField} from "@material-ui/core";
 import {PostAddOutlined} from "@material-ui/icons";
+import {RequestStatusType} from "../../app/app-reducer";
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
+    entityStatus: RequestStatusType
 }
 
 export const AddItemForm = React.memo ((props: AddItemFormPropsType) => {
@@ -43,11 +44,12 @@ export const AddItemForm = React.memo ((props: AddItemFormPropsType) => {
                        onKeyPress={onKeyPressHandler}
                        error={!!error}
                        helperText={error}
+                       disabled={props.entityStatus === 'loading'}
             />
 
-            <Button onClick={addItem}  color={"default"}>
-                <PostAddOutlined color={"primary"}/>
-            </Button>
+            <IconButton onClick={addItem}  color={"primary"} disabled={props.entityStatus === 'loading'}>
+                <PostAddOutlined />
+            </IconButton>
 
         </div>
     )

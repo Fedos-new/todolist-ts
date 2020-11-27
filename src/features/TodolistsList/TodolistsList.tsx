@@ -8,12 +8,12 @@ import {
     FilterValuesType, removeTodolistTC,
     TodolistDomainType
 } from "./todolists-reducer";
-import {addTaskTC, removeTaskTC, updateTaskTC} from "./tasks-reducer";
+import {addTaskTC, removeTaskTC, TasksStateType, updateTaskTC} from "./tasks-reducer";
 import {TaskStatuses} from "../../api/todolist-api";
 import {Grid, Paper} from "@material-ui/core";
 import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
 import Todolist from "./Todolist/Todolist";
-import {TasksStateType} from "../../app/App";
+
 
 type TodolistsListsPropsType = {}
 
@@ -71,7 +71,7 @@ export const TodolistsList: React.FC<TodolistsListsPropsType> = (props) =>{
     return (
         <>
             <Grid container style={{padding: "20px"}}>
-                <AddItemForm addItem={addTodolist}/>
+                <AddItemForm addItem={addTodolist} entityStatus={'idle'}/>
             </Grid>
             <Grid container spacing={3}>
                 {
@@ -85,6 +85,7 @@ export const TodolistsList: React.FC<TodolistsListsPropsType> = (props) =>{
                                         key={tl.id}
                                         id={tl.id}
                                         title={tl.title}
+                                        entityStatus={tl.entityStatus}
                                         tasks={allTodolistTask}
                                         removeTask={removeTask}
                                         changeFilter={changeFilter}

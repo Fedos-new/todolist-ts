@@ -1,19 +1,15 @@
 import React from 'react';
 import './App.css';
-
 import {AppBar, IconButton, Toolbar, Typography, Button, Container, LinearProgress} from '@material-ui/core';
 import {Menu} from '@material-ui/icons';
-import {TaskType} from "../api/todolist-api";
 import {TodolistsList} from "../features/TodolistsList/TodolistsList";
 import {useSelector} from "react-redux";
 
 import {AppRootState} from "./store";
 import {RequestStatusType} from "./app-reducer";
+import {ErrorSnackbar} from "../components/ ErrorSnackbar/ErrorSnackbar";
 
 
-export type TasksStateType = {
-    [key: string]: Array<TaskType>
-}
 
 function App() {
 
@@ -22,7 +18,8 @@ function App() {
 
     return (
         <div className="App">
-            <AppBar position="static">
+           <ErrorSnackbar/>
+            <AppBar position="static" className='bar'>
                 <Toolbar>
                     <IconButton edge="start" color="inherit" aria-label="menu">
                         <Menu/>
