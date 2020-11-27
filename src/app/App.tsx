@@ -1,10 +1,14 @@
 import React from 'react';
 import './App.css';
 
-import {AppBar, IconButton, Toolbar, Typography, Button, Container} from '@material-ui/core';
+import {AppBar, IconButton, Toolbar, Typography, Button, Container, LinearProgress} from '@material-ui/core';
 import {Menu} from '@material-ui/icons';
 import {TaskType} from "../api/todolist-api";
 import {TodolistsList} from "../features/TodolistsList/TodolistsList";
+import {useSelector} from "react-redux";
+
+import {AppRootState} from "./store";
+import {RequestStatusType} from "./app-reducer";
 
 
 export type TasksStateType = {
@@ -12,8 +16,8 @@ export type TasksStateType = {
 }
 
 function App() {
-    console.log('App is called')
 
+    const status = useSelector<AppRootState, RequestStatusType >(state => state.app.status)
 
 
     return (
@@ -29,7 +33,7 @@ function App() {
                     <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
-
+            { status === 'loading' &&  <LinearProgress color="secondary" />}
             <Container fixed>
                 <TodolistsList />
             </Container>
