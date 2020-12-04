@@ -59,7 +59,7 @@ export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch<ActionsT
             const tasks = res.data.items
             const action = setTasksAC(tasks, todolistId)
             dispatch(action)
-            dispatch(setAppStatusAC('succeeced'))
+            dispatch(setAppStatusAC('succeeded'))
         })
 }
 export const removeTaskTC = (taskId: string, todoListId: string) => (dispatch: Dispatch<ActionsType>) => {
@@ -71,7 +71,7 @@ export const removeTaskTC = (taskId: string, todoListId: string) => (dispatch: D
             } else {
                 handleServerAppError(res.data, dispatch)
             }
-            dispatch(setAppStatusAC('succeeced'))
+            dispatch(setAppStatusAC('succeeded'))
         })
         .catch((error) => {
             handleServerNetworkError(error, dispatch)
@@ -87,7 +87,7 @@ export const addTaskTC = (title: string, todoListId: string) => (dispatch: Dispa
             } else {
                 handleServerAppError(res.data, dispatch)
             }
-            dispatch(setAppStatusAC('succeeced'))
+            dispatch(setAppStatusAC('succeeded'))
         })
         .catch((error) => {
             handleServerNetworkError(error, dispatch)
@@ -120,7 +120,7 @@ export const updateTaskTC = (taskId: string, domainModel: UpdateDomainTaskModelT
                 } else {
                     handleServerAppError(res.data, dispatch)
                 }
-                dispatch(setAppStatusAC('succeeced'))
+                dispatch(setAppStatusAC('succeeded'))
             })
             .catch((error) => {
                 handleServerNetworkError(error, dispatch)

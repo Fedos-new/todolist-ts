@@ -49,7 +49,7 @@ export const fetchTodolistsTS = () => {
         todolistAPI.getTodolists()
             .then((res) => {
                 dispatch(setTodolistsAC(res))
-                dispatch(setAppStatusAC('succeeced'))
+                dispatch(setAppStatusAC('succeeded'))
             })
 
     }
@@ -65,7 +65,7 @@ export const removeTodolistTC = (todolistId: string) => {
                 } else {
                     handleServerAppError(res.data, dispatch)
                 }
-                dispatch(setAppStatusAC('succeeced'))
+                dispatch(setAppStatusAC('succeeded'))
             })
             .catch((error) => {
                 handleServerNetworkError(error, dispatch)
@@ -83,7 +83,7 @@ export const addTodolistTC = (title: string) => {
                 } else {
                     handleServerAppError(res.data, dispatch)
                 }
-                dispatch(setAppStatusAC('succeeced'))
+                dispatch(setAppStatusAC('succeeded'))
             })
             .catch((error) => {
                 handleServerNetworkError(error, dispatch)
@@ -96,7 +96,7 @@ export const changeTodolistTitleTC = (todolistId: string, title: string) => {
         todolistAPI.updateTodolist(todolistId, title)
             .then(res => {
                 dispatch(changeTodolistTitleAC(todolistId, title))
-                dispatch(setAppStatusAC('succeeced'))
+                dispatch(setAppStatusAC('succeeded'))
             })
             .catch((error) => {
                 handleServerNetworkError(error, dispatch)
