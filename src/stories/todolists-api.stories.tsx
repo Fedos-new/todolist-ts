@@ -18,6 +18,7 @@ export const GetTodolists = () => {
     return <div> {JSON.stringify(state)}</div>
 
 }
+
 export const CreateTodolist = () => {
     const [state, setState] = useState<any>(null)
     let title = 'newTitleTodolist'

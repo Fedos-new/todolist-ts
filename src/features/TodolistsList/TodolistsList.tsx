@@ -38,7 +38,7 @@ export const TodolistsList: React.FC<TodolistsListsPropsType> = (props) => {
     }, [])
 
     const changeFilter = useCallback((value: FilterValuesType, todolistId: string) => {
-        const action = changeTodolistFilterAC(value, todolistId)
+        const action = changeTodolistFilterAC({filter: value, id: todolistId})
         dispatch(action)
     }, [])
 
@@ -71,11 +71,9 @@ export const TodolistsList: React.FC<TodolistsListsPropsType> = (props) => {
         const action = changeTodolistTitleTC(todolistId, newTitle)
         dispatch(action)
     }, [])
-
     if (!isLoggedIn) {
         return <Redirect to={'/login'}/>
     }
-
     return (
         <>
             <Grid container style={{padding: "20px"}}>
@@ -85,7 +83,6 @@ export const TodolistsList: React.FC<TodolistsListsPropsType> = (props) => {
                 {
                     todolists.map(tl => {
                         let allTodolistTask = tasks[tl.id]
-
                         return (
                             <Grid item>
                                 <Paper style={{padding: "10px"}}>
@@ -111,5 +108,4 @@ export const TodolistsList: React.FC<TodolistsListsPropsType> = (props) => {
             </Grid>
         </>
     )
-
 }
