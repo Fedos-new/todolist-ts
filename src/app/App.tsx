@@ -52,7 +52,7 @@ function App() {
                         <Menu/>
                     </IconButton>
                     <Typography variant="h6">
-                        News
+                        TodoList
                     </Typography>
 
                     {isInitialized && <Button color="inherit" onClick={logOut}>Log out</Button>}
