@@ -1,11 +1,21 @@
 import React from 'react'
-import {Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, TextField, Button, Grid} from '@material-ui/core'
+import {
+    Checkbox,
+    FormControl,
+    FormControlLabel,
+    FormGroup,
+    FormLabel,
+    TextField,
+    Button,
+    Grid,
+    Paper
+} from '@material-ui/core'
 import {useFormik} from "formik";
 import {loginTC} from "./auth-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootState} from "../../app/store";
 import {Redirect} from "react-router-dom";
-
+import {useStyles} from "../../app/useStyles";
 
 type FormikErrorsType = {
     email?: string;
@@ -18,6 +28,7 @@ export const Login = () => {
 
     const dispatch = useDispatch()
     const isLoggedIn = useSelector<AppRootState, boolean>(state => state.auth.isLoggedIn)
+    const classes = useStyles()
 
     const formik = useFormik({
         initialValues: {
@@ -50,14 +61,15 @@ export const Login = () => {
         return <Redirect to={'/'}/>
     }
 
-    return <Grid container justify="center">
-        <Grid item xs={4}>
+    return <Grid container justify="center" alignItems="center">
+        <Paper className={classes.paperLogin}>
+
             <form onSubmit={formik.handleSubmit}>
                 <FormControl>
                     <FormLabel>
                         <p>To log in get registered&nbsp;
                             <a href={'https://social-network.samuraijs.com/'}
-                               target={'_blank'}>here
+                               target={'_blank'} rel="noopener noreferrer">here
                             </a>
                         </p>
                         <p>or use common test account credentials:</p>
@@ -92,7 +104,7 @@ export const Login = () => {
                     </FormGroup>
                 </FormControl>
             </form>
-        </Grid>
+        </Paper>
     </Grid>
 
 }

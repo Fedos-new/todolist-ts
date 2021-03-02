@@ -14,12 +14,14 @@ import {Grid, Paper} from "@material-ui/core";
 import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
 import Todolist from "./Todolist/Todolist";
 import {Redirect} from "react-router-dom";
+import {useStyles} from "../../app/useStyles";
 
 
 type TodolistsListsPropsType = {}
 
 export const TodolistsList: React.FC<TodolistsListsPropsType> = (props) => {
 
+    const classes = useStyles()
     const todolists = useSelector<AppRootState, Array<TodolistDomainType>>(store => store.todolists)
     const tasks = useSelector<AppRootState, TasksStateType>(store => store.tasks)
     const dispatch = useDispatch()
@@ -76,7 +78,7 @@ export const TodolistsList: React.FC<TodolistsListsPropsType> = (props) => {
     }
     return (
         <>
-            <Grid container style={{padding: "20px"}}>
+            <Grid  className={classes.gridAddForm} >
                 <AddItemForm addItem={addTodolist} entityStatus={'idle'}/>
             </Grid>
             <Grid container spacing={3}>
@@ -84,8 +86,8 @@ export const TodolistsList: React.FC<TodolistsListsPropsType> = (props) => {
                     todolists.map(tl => {
                         let allTodolistTask = tasks[tl.id]
                         return (
-                            <Grid item>
-                                <Paper style={{padding: "10px"}}>
+                            <Grid item key={tl.id}>
+                                <Paper  className={classes.paperTodo}>
                                     <Todolist
                                         key={tl.id}
                                         id={tl.id}
